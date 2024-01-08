@@ -1,14 +1,12 @@
-from tkinter import * 
+import tkinter
 import qrcode  
-from tkinter import ttk, filedialog 
-from tkinter.filedialog import askopenfile 
 import os 
 import cv2 
 import customtkinter 
  
  
 customtkinter.set_appearance_mode("Light") 
-cp = Tk() 
+cp = tkinter.Tk() 
 cp.title('QRCode Generator & Scanner ') 
 cp.geometry('350x350') 
 cp.config(bg='#0D5F5F') 
@@ -17,7 +15,7 @@ def generate():
     img = qrcode.make(msg.get()) 
     type(img) 
     img.save(f'{save_name.get()}.png') 
-    Label(cp, text='File Saved!', bg='#052A2A' , fg='white', font=('Louis George Cafe Bold Italic', 8)).pack() 
+    tkinter.Label(cp, text='File Saved!', bg='#052A2A' , fg='white', font=('Louis George Cafe Bold Italic', 8)).pack() 
  
 def show(): 
     img = qrcode.make(msg.get()) 
@@ -26,7 +24,7 @@ def show():
  
  
 def open_file(): 
-   file = filedialog.askopenfile(mode='r+', filetypes=[('png', '*.png')]) 
+   file = tkinter.filedialog.askopenfile(mode='r+', filetypes=[('png', '*.png')]) 
    filepath = os.path.abspath(file.name)  
     
    # read the QRCODE image 
@@ -42,26 +40,26 @@ def open_file():
         print("There was some error") 
 
 
-frame = Frame(cp, bg='#0D5F5F') 
+frame = tkinter.Frame(cp, bg='#0D5F5F') 
 frame.pack(expand=True) 
  
-#------------------ENTER THE TEXT OR URL------------------ 
+# Enter the text or URL
  
-Label(frame, text='URL: ', font=('Louis George Cafe Bold', 16), 
+tkinter.Label(frame, text='URL: ', font=('Louis George Cafe Bold', 16), 
       bg='#0D5F5F').grid(row=0, column=0, sticky='w') 
  
-msg = Entry(frame) 
+msg = tkinter.Entry(frame) 
 msg.grid(row=0, column=1) 
  
-#------------------ENTER THE FILE NAME------------------ 
+# Enter the file name 
  
-Label(frame, text='Save As: ', font=('Louis George Cafe Bold', 16), 
+tkinter.Label(frame, text='Save As: ', font=('Louis George Cafe Bold', 16), 
       bg='#0D5F5F').grid(row=1, column=0, sticky='w') 
  
-save_name = Entry(frame) 
+save_name = tkinter.Entry(frame) 
 save_name.grid(row=1, column=1) 
  
-#------------------BUTTONS TO SHOW AND SAVE AND SCAN QRCODE------------------ 
+# Buttons to (Show, Scan, Save) 
  
 btn = customtkinter.CTkButton(cp, text='Show QRCode', bd='6', command=show, width=20,fg_color=("white","black")) 
 btn.pack() 

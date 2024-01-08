@@ -3,31 +3,33 @@ import qrcode
 import os 
 import cv2 
 import customtkinter 
- 
- 
+
+# Start implementing the GUI 
 customtkinter.set_appearance_mode("Light") 
 cp = tkinter.Tk() 
 cp.title('QRCode Generator & Scanner ') 
 cp.geometry('350x350') 
 cp.config(bg='#0D5F5F') 
 
+# Generate QR_code function
 def generate(): 
     img = qrcode.make(msg.get()) 
     type(img) 
     img.save(f'{save_name.get()}.png') 
     tkinter.Label(cp, text='File Saved!', bg='#052A2A' , fg='white', font=('Louis George Cafe Bold Italic', 8)).pack() 
- 
+
+# Display QR_code function
 def show(): 
     img = qrcode.make(msg.get()) 
     type(img) 
     img.show() 
  
- 
+# Open any QR_code image and scan it 
 def open_file(): 
    file = tkinter.filedialog.askopenfile(mode='r+', filetypes=[('png', '*.png')]) 
    filepath = os.path.abspath(file.name)  
     
-   # read the QRCODE image 
+   # scan the QRCODE image 
    image = cv2.imread(filepath) 
    detector = cv2.QRCodeDetector() 
    data, vertices_array, binary_qrcode = detector.detectAndDecode(image) 
